@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.Server;
@@ -10,7 +12,7 @@ namespace MND
 	{
 		public override void AssetsLoaded(ICoreAPI api)
 		{
-			if (api is not ICoreServerAPI)
+			if (api.Side != EnumAppSide.Server)
 			{
 				return;
 			}
@@ -29,19 +31,93 @@ namespace MND
 			int applied = 0, notFound = 0, errorCount = 0;
 			jsonPatcher.ApplyPatch(0, location, patch, ref applied, ref notFound, ref errorCount);
 
-			patch = new JsonPatch()
+			if (!ApiModConfigHelper.Config.Enabled)
 			{
-				Op = EnumJsonPatchOp.AddMerge,
-				Path = "/client/behaviors/4/quantitySlots",
-				Value = JsonObject.FromJson("8")
-			};
+				return;
+			}
 
+			var patches = new Dictionary<string, List<JsonPatch>>();
 			foreach (var mob in Config.MOBS)
 			{
-				location = AssetLocation.Create($"entities/lore/{mob}");
-				patch.File = location;
+				patches[mob] = [
+					new() {
+						Op = EnumJsonPatchOp.AddMerge,
+						Path = "/client/behaviors/4/quantitySlots",
+						Value = JsonObject.FromJson("8")
+					}
+				];
+			}
 
-				jsonPatcher.ApplyPatch(0, location, patch, ref applied, ref notFound, ref errorCount);
+			var data = new Dictionary<string, Dictionary<string, JArray>>();
+			foreach (var (itemCode, item) in ApiModConfigHelper.Config.Items)
+			{
+				if (!item.Enabled)
+				{
+					continue;
+				}
+
+				foreach (var (mobCode, mob) in item.Mobs)
+				{
+					if (!mob.Enabled)
+					{
+						continue;
+					}
+
+					if (!data.TryGetValue(mobCode, out var mobData))
+					{
+						mobData = data[mobCode] = [];
+					}
+
+					foreach (var (variantCode, variant) in mob.Variants)
+					{
+						if (!variant.Enabled)
+						{
+							continue;
+						}
+
+						if (!mobData.TryGetValue(variantCode, out var variantData))
+						{
+							variantData = mobData[variantCode] = [];
+						}
+
+						var multiplier = ApiModConfigHelper.Config.Multiplier * item.Multiplier * mob.Multiplier * variant.Multiplier;
+						var qtyObj = new JObject
+						{
+							["avg"] = variant.Quantity * multiplier,
+							["var"] = variant.Variability
+						};
+						var patchObj = new JObject
+						{
+							["type"] = "item",
+							["code"] = itemCode,
+							["quantity"] = qtyObj
+						};
+						variantData.Add(patchObj);
+					}
+				}
+			}
+
+			foreach (var (mobCode, mobData) in data)
+			{
+				foreach (var (variantCode, variantData) in mobData)
+				{
+					patches[mobCode].Add(new()
+					{
+						Op = EnumJsonPatchOp.Replace,
+						Path = $"/server/behaviors/9/dropsByType/{mobCode}-{variantCode}",
+						Value = new(variantData)
+					});
+				}
+			}
+
+			foreach (var (mobCode, items) in patches)
+			{
+				location = AssetLocation.Create($"entities/lore/{mobCode}");
+				foreach (var item in items)
+				{
+					item.File = location;
+					jsonPatcher.ApplyPatch(0, location, item, ref applied, ref notFound, ref errorCount);
+				}
 			}
 		}
 
