@@ -1,5 +1,4 @@
-﻿using HarmonyLib;
-using System;
+﻿using System;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.Server;
@@ -9,10 +8,13 @@ namespace MND
 {
 	public class MNDModSystem : ModSystem
 	{
-		Config? _config;
-
 		public override void AssetsLoaded(ICoreAPI api)
 		{
+			if (api is not ICoreServerAPI)
+			{
+				return;
+			}
+
 			var jsonPatcher = api.ModLoader.GetModSystem<ModJsonPatchLoader>();
 
 			var location = AssetLocation.Create("itemtypes/resource/gear");
@@ -43,27 +45,18 @@ namespace MND
 			}
 		}
 
-		public override void StartServerSide(ICoreServerAPI api)
+		public override void Start(ICoreAPI api)
 		{
-			ApiModHelper.Api = api;
-			ApiModHelper.Mod = Mod;
-
-			_config = Config.Get();
-
-			HarvestableBehaviorInitializePatch.Config = _config;
-
-			var harmony = new Harmony(Mod.Info.ModID);
-			harmony.PatchAll();
-		}
-
-		public override void Dispose()
-		{
-			var harmony = new Harmony(Mod.Info.ModID);
-			harmony.UnpatchAll();
+			if (api is not ICoreServerAPI sapi)
+			{
+				return;
+			}
+			ApiModConfigHelper.Api = sapi;
+			ApiModConfigHelper.Mod = Mod;
 		}
 	}
 	
-	public static class ApiModHelper
+	public static class ApiModConfigHelper
 	{
 		static ICoreServerAPI? _api;
 		public static ICoreServerAPI Api
@@ -77,6 +70,16 @@ namespace MND
 		{
 			get => _mod ?? throw new System.Exception("");
 			set => _mod = value;
+		}
+
+		static Config? _config;
+		public static Config Config
+		{
+			get
+			{
+				_config ??= Config.Get();
+				return _config;
+			}
 		}
 
 		public static void Error(string message) => Mod.Logger.Error(message);

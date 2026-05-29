@@ -2017,17 +2017,17 @@ namespace MND
 			Config? config;
 			try
 			{
-				config = ApiModHelper.Api.LoadModConfig<Config>(FILENAME);
+				config = ApiModConfigHelper.Api.LoadModConfig<Config>(FILENAME);
 				config ??= GetDefault();
 			}
 			catch (Exception ex)
 			{
-				ApiModHelper.Error("Config file broken, fix it or delete it :-/");
-				ApiModHelper.Error(ex);
+				ApiModConfigHelper.Error("Config file broken, fix it or delete it :-/");
+				ApiModConfigHelper.Error(ex);
 
 				return GetDefault();
 			}
-			ApiModHelper.StoreConfig(config, FILENAME);
+			ApiModConfigHelper.StoreConfig(config, FILENAME);
 			return config;
 		}
 	}
