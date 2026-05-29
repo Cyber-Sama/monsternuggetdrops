@@ -104,7 +104,7 @@ namespace MND
 					patches[mobCode].Add(new()
 					{
 						Op = EnumJsonPatchOp.Replace,
-						Path = $"/server/behaviors/9/dropsByType/{mobCode}-{variantCode}",
+						Path = variantCode == "*" ? "/server/behaviors/9/dropsByType/*" : $"/server/behaviors/9/dropsByType/*-{variantCode}",
 						Value = new(variantData)
 					});
 				}

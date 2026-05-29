@@ -1565,7 +1565,7 @@ namespace MND
 									Variants = new()
 									{
 										{
-											"normal",
+											"surface",
 											new()
 											{
 												Quantity = 0.03f
@@ -1609,7 +1609,7 @@ namespace MND
 									Variants = new()
 									{
 										{
-											"normal",
+											"surface",
 											new()
 											{
 												Quantity = 0.03f
