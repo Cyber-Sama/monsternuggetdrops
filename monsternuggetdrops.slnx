@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Project Path="CakeBuild/CakeBuild.csproj" />
+  <Project Path="monsternuggetdrops/monsternuggetdrops.csproj" Id="795f98c9-9310-4fdc-808d-6c1fa2f9c9ca" />
+</Solution>
