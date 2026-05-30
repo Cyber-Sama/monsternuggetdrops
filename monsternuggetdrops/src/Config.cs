@@ -5,2005 +5,1651 @@ namespace MND
 {
 	public class Config
 	{
-		const string FILENAME = "yourconfig.json";
+		const string FILENAME = "monsterNuggetDrops.json";
 		public static readonly string[] MOBS = ["drifter", "bowtorn", "shiver"];
-
-		public bool Enabled { get; set; } = true;
-		public float Multiplier { get; set; } = 1;
-		public Dictionary<string, ConfigItem> Items { get; set; } = [];
 
 		public static Config GetDefault() => new()
 		{
-			Items = new()
+			EnabledItemsWithMultipliers =
+			{
+				{ "flaxfibers", 1 },
+				{ "gear-temporal", 1 },
+				{ "gear-rusty", 1 },
+				{ "cattailtops", 1 },
+				{ "arrow-bone", 1 },
+				{ "nugget-nativecopper", 1 },
+				{ "nugget-cassiterite", 1 },
+				{ "nugget-sphalerite", 1 },
+				{ "nugget-galena", 1 },
+				{ "nugget-nativesilver", 1 },
+				{ "nugget-hematite", 1 },
+				{ "hide-scraped-small", 1 },
+				{ "hide-scraped-medium", 1 },
+				{ "stone-bauxite", 1 },
+				{ "stone-meteorite-iron", 1 },
+				{ "stackrandomizer-alljonas", 1 }
+			},
+			Mobs = new()
 			{
 				{
-					"flaxfibers",
+					"drifter-normal",
 					new()
 					{
-						Mobs = new()
+						LootTable = new()
 						{
 							{
-								"drifter",
+								"flaxfibers",
 								new()
 								{
-									Variants = new()
-									{
-										{
-											"normal",
-											new()
-											{
-												Quantity = 0.25f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.5f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.75f,
-												Variability = 0.75f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Variability = 1
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 1.5f,
-												Variability = 1
-											}
-										},
-										{
-											"double-headed",
-											new()
-											{
-												Quantity = 3,
-												Variability = 1
-											}
-										}
-									}
+									Quantity = 0.25f
 								}
 							},
 							{
-								"bowtorn",
-								new ()
-								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.3333f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.6667f,
-												Variability = 0.6667f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Variability = 1
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 1.5f,
-												Variability = 1
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 2,
-												Variability = 1
-											}
-										},
-										{
-											"gearfoot",
-											new()
-											{
-												Quantity = 4,
-												Variability = 1
-											}
-										}
-									}
-								}
-							},
-							{
-								"shiver",
-								new ()
-								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.3333f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.6667f,
-												Variability = 0.6667f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Variability = 1
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 1.5f,
-												Variability = 1
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 2,
-												Variability = 1
-											}
-										},
-										{
-											"*",
-											new()
-											{
-												Quantity = 4,
-												Variability = 1
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				},
-				{
-					"gear-temporal",
-					new()
-					{
-						Mobs = new()
-						{
-							{
-								"drifter",
+								"gear-temporal",
 								new()
 								{
-									Variants = new()
-									{
-										{
-											"normal",
-											new()
-											{
-												Quantity = 0.05f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.0625f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.075f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.0875f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.1f,
-												Variability = 1
-											}
-										},
-										{
-											"double-headed",
-											new()
-											{
-												Variability = 1
-											}
-										}
-									}
+									Quantity = 0.05f
 								}
 							},
 							{
-								"bowtorn",
-								new ()
-								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.05f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.0625f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.075f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.0875f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.1f
-											}
-										},
-										{
-											"gearfoot",
-											new()
-											{
-												Quantity = 1.5f,
-												Variability = 1
-											}
-										}
-									}
-								}
-							},
-							{
-								"shiver",
-								new ()
-								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.05f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.0625f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.075f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.875f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.1f
-											}
-										},
-										{
-											"*",
-											new()
-											{
-												Quantity = 1.5f,
-												Variability = 1
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				},
-				{
-					"gear-rusty",
-					new()
-					{
-						Mobs = new()
-						{
-							{
-								"drifter",
+								"gear-rusty",
 								new()
 								{
-									Variants = new()
-									{
-										{
-											"normal",
-											new()
-											{
-												Quantity = 0.02f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.04f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.08f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.15f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.3f
-											}
-										},
-										{
-											"double-headed",
-											new()
-											{
-												Quantity = 5,
-												Variability = 3
-											}
-										}
-									}
+									Quantity = 0.02f
 								}
 							},
 							{
-								"bowtorn",
-								new ()
-								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.03f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.06f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.12f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.25f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.5f
-											}
-										},
-										{
-											"gearfoot",
-											new()
-											{
-												Quantity = 7,
-												Variability = 3
-											}
-										}
-									}
-								}
-							},
-							{
-								"shiver",
-								new ()
-								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.03f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.06f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.12f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.25f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.5f
-											}
-										},
-										{
-											"*",
-											new()
-											{
-												Quantity = 7,
-												Variability = 3
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				},
-				{
-					"cattailtops",
-					new()
-					{
-						Mobs = new()
-						{
-							{
-								"drifter",
+								"cattailtops",
 								new()
 								{
-									Variants = new()
-									{
-										{
-											"normal",
-											new()
-											{
-												Quantity = 0.25f
-											}
-										}
-									}
+									Quantity = 0.25f
 								}
 							},
 							{
-								"bowtorn",
-								new ()
-								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.3333f
-											}
-										}
-									}
-								}
-							},
-							{
-								"shiver",
-								new ()
-								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.3333f
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				},
-				{
-					"arrow-bone",
-					new()
-					{
-						Mobs = new()
-						{
-							{
-								"bowtorn",
-								new ()
-								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.75f,
-												Variability = 0.75f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Variability = 1
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 1.5f,
-												Variability = 1
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 2,
-												Variability = 1
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 3,
-												Variability = 1
-											}
-										},
-										{
-											"gearfoot",
-											new()
-											{
-												Quantity = 4,
-												Variability = 2
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				},
-				{
-					"nugget-nativecopper",
-					new()
-					{
-						Mobs = new()
-						{
-							{
-								"drifter",
+								"nugget-nativecopper",
 								new()
 								{
-									Variants = new()
-									{
-										{
-											"normal",
-											new()
-											{
-												Quantity = 0.25f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.5f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.75f,
-												Variability = 0.75f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Variability = 1
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 1.5f,
-												Variability = 1
-											}
-										}
-									}
+									Quantity = 0.25f
 								}
 							},
 							{
-								"bowtorn",
-								new ()
-								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.5f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.6667f,
-												Variability = 0.6667f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Variability = 1
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 1.5f,
-												Variability = 1
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 2,
-												Variability = 1
-											}
-										}
-									}
-								}
-							},
-							{
-								"shiver",
-								new ()
-								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.3333f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.6667f,
-												Variability = 0.6667f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Variability = 1
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 1.5f,
-												Variability = 1
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 2,
-												Variability = 1
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				},
-				{
-					"nugget-cassiterite",
-					new()
-					{
-						Mobs = new()
-						{
-							{
-								"drifter",
+								"nugget-cassiterite",
 								new()
 								{
-									Variants = new()
-									{
-										{
-											"normal",
-											new()
-											{
-												Quantity = 0.01f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.1f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.2f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.3f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.4f
-											}
-										}
-									}
+									Quantity = 0.01f
 								}
 							},
 							{
-								"bowtorn",
-								new ()
-								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.015f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.15f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.3f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.45f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.6f
-											}
-										}
-									}
-								}
-							},
-							{
-								"shiver",
-								new ()
-								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.015f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.15f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.3f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.45f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.6f
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				},
-				{
-					"hide-scraped-small",
-					new()
-					{
-						Mobs = new()
-						{
-							{
-								"drifter",
+								"nugget-sphalerite",
 								new()
 								{
-									Variants = new()
-									{
-										{
-											"normal",
-											new()
-											{
-												Quantity = 0.05f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.1f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.15f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.2f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.25f
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				},
-				{
-					"hide-scraped-medium",
-					new()
-					{
-						Mobs = new()
-						{
-							{
-								"bowtorn",
-								new ()
-								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.05f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.1f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.15f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.2f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.25f
-											}
-										}
-									}
+									Quantity = 0.05f
 								}
 							},
 							{
-								"shiver",
-								new ()
-								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.05f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.1f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.15f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.2f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.25f
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				},
-				{
-					"nugget-sphalerite",
-					new()
-					{
-						Mobs = new()
-						{
-							{
-								"drifter",
+								"nugget-galena",
 								new()
 								{
-									Variants = new()
-									{
-										{
-											"normal",
-											new()
-											{
-												Quantity = 0.05f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.05f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.05f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.05f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.05f
-											}
-										}
-									}
+									Quantity = 0.02f
 								}
 							},
 							{
-								"bowtorn",
-								new ()
+								"nugget-nativesilver",
+								new()
 								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.075f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.075f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.075f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.075f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.075f
-											}
-										}
-									}
+									Quantity = 0.0025f
 								}
 							},
 							{
-								"shiver",
-								new ()
+								"hide-scraped-small",
+								new()
 								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.075f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.075f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.075f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.075f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.075f
-											}
-										}
-									}
+									Quantity = 0.05f
+								}
+							},
+							{
+								"stone-bauxite",
+								new()
+								{
+									Quantity = 0.02f
+								}
+							},
+							{
+								"stone-meteorite-iron",
+								new()
+								{
+									Quantity = 0.005f
 								}
 							}
 						}
 					}
 				},
 				{
-					"nugget-hematite",
+					"drifter-deep",
 					new()
 					{
-						Mobs = new()
+						LootTable = new()
 						{
 							{
-								"drifter",
+								"flaxfibers",
 								new()
 								{
-									Variants = new()
-									{
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.025f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.25f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.5f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.75f,
-												Variability = 0.75f
-											}
-										},
-										{
-											"double-headed",
-											new()
-											{
-												Quantity = 1.5f,
-												Variability = 1
-											}
-										}
-									}
+									Quantity = 0.5f
 								}
 							},
 							{
-								"bowtorn",
-								new ()
+								"gear-temporal",
+								new()
 								{
-									Variants = new()
-									{
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.0333f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.3333f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.6667f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Variability = 1
-											}
-										},
-										{
-											"gearfoot",
-											new()
-											{
-												Quantity = 2,
-												Variability = 1
-											}
-										}
-									}
+									Quantity = 0.0625f
 								}
 							},
 							{
-								"shiver",
-								new ()
+								"gear-rusty",
+								new()
 								{
-									Variants = new()
-									{
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.0333f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.3333f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.6667f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Variability = 1
-											}
-										},
-										{
-											"*",
-											new()
-											{
-												Quantity = 2,
-												Variability = 1
-											}
-										}
-									}
+									Quantity = 0.04f
+								}
+							},
+							{
+								"nugget-nativecopper",
+								new()
+								{
+									Quantity = 0.5f
+								}
+							},
+							{
+								"nugget-cassiterite",
+								new()
+								{
+									Quantity = 0.1f
+								}
+							},
+							{
+								"nugget-sphalerite",
+								new()
+								{
+									Quantity = 0.05f
+								}
+							},
+							{
+								"nugget-galena",
+								new()
+								{
+									Quantity = 0.02f
+								}
+							},
+							{
+								"nugget-nativesilver",
+								new()
+								{
+									Quantity = 0.005f
+								}
+							},
+							{
+								"nugget-hematite",
+								new()
+								{
+									Quantity = 0.025f
+								}
+							},
+							{
+								"hide-scraped-small",
+								new()
+								{
+									Quantity = 0.1f
+								}
+							},
+
+							{
+								"stone-bauxite",
+								new()
+								{
+									Quantity = 0.04f
+								}
+							},
+							{
+								"stone-meteorite-iron",
+								new()
+								{
+									Quantity = 0.01f
 								}
 							}
 						}
 					}
 				},
 				{
-					"stone-bauxite",
+					"drifter-tainted",
 					new()
 					{
-						Mobs = new()
+						LootTable = new()
 						{
 							{
-								"drifter",
+								"flaxfibers",
 								new()
 								{
-									Variants = new()
-									{
-										{
-											"normal",
-											new()
-											{
-												Quantity = 0.02f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.04f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.06f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.08f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.1f
-											}
-										}
-									}
+									Quantity = 0.75f,
+									Variability = 0.75f
 								}
 							},
 							{
-								"bowtorn",
-								new ()
+								"gear-temporal",
+								new()
 								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.03f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.06f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.09f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.12f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.15f
-											}
-										}
-									}
+									Quantity = 0.075f
 								}
 							},
 							{
-								"shiver",
-								new ()
+								"gear-rusty",
+								new()
 								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.03f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.06f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.09f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.12f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.15f
-											}
-										}
-									}
+									Quantity = 0.08f
+								}
+							},
+							{
+								"nugget-nativecopper",
+								new()
+								{
+									Quantity = 0.75f,
+									Variability = 0.75f
+								}
+							},
+							{
+								"nugget-cassiterite",
+								new()
+								{
+									Quantity = 0.2f
+								}
+							},
+							{
+								"nugget-sphalerite",
+								new()
+								{
+									Quantity = 0.05f
+								}
+							},
+							{
+								"nugget-galena",
+								new()
+								{
+									Quantity = 0.02f
+								}
+							},
+							{
+								"nugget-nativesilver",
+								new()
+								{
+									Quantity = 0.0075f
+								}
+							},
+							{
+								"nugget-hematite",
+								new()
+								{
+									Quantity = 0.25f
+								}
+							},
+							{
+								"hide-scraped-small",
+								new()
+								{
+									Quantity = 0.15f
+								}
+							},
+							{
+								"stone-bauxite",
+								new()
+								{
+									Quantity = 0.06f
+								}
+							},
+							{
+								"stone-meteorite-iron",
+								new()
+								{
+									Quantity = 0.015f
 								}
 							}
 						}
 					}
 				},
 				{
-					"nugget-galena",
+					"drifter-corrupt",
 					new()
 					{
-						Mobs = new()
+						LootTable = new()
 						{
 							{
-								"drifter",
+								"flaxfibers",
 								new()
 								{
-									Variants = new()
-									{
-										{
-											"normal",
-											new()
-											{
-												Quantity = 0.02f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.02f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.02f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.02f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.02f
-											}
-										}
-									}
+									Variability = 1
 								}
 							},
 							{
-								"bowtorn",
-								new ()
+								"gear-temporal",
+								new()
 								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.03f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.03f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.03f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.03f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.03f
-											}
-										}
-									}
+									Quantity = 0.0875f
 								}
 							},
 							{
-								"shiver",
-								new ()
+								"gear-rusty",
+								new()
 								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.03f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.03f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.03f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.03f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.03f
-											}
-										}
-									}
+									Quantity = 0.15f
+								}
+							},
+							{
+								"nugget-nativecopper",
+								new()
+								{
+									Variability = 1
+								}
+							},
+							{
+								"nugget-cassiterite",
+								new()
+								{
+									Quantity = 0.3f
+								}
+							},
+							{
+								"nugget-sphalerite",
+								new()
+								{
+									Quantity = 0.05f
+								}
+							},
+							{
+								"nugget-galena",
+								new()
+								{
+									Quantity = 0.02f
+								}
+							},
+							{
+								"nugget-nativesilver",
+								new()
+								{
+									Quantity = 0.01f
+								}
+							},
+							{
+								"nugget-hematite",
+								new()
+								{
+									Quantity = 0.5f
+								}
+							},
+							{
+								"hide-scraped-small",
+								new()
+								{
+									Quantity = 0.2f
+								}
+							},
+							{
+								"stone-bauxite",
+								new()
+								{
+									Quantity = 0.08f
+								}
+							},
+							{
+								"stone-meteorite-iron",
+								new()
+								{
+									Quantity = 0.02f
 								}
 							}
 						}
 					}
 				},
 				{
-					"stone-meteorite-iron",
+					"drifter-nightmare",
 					new()
 					{
-						Mobs = new()
+						LootTable = new()
 						{
 							{
-								"drifter",
+								"flaxfibers",
 								new()
 								{
-									Variants = new()
-									{
-										{
-											"normal",
-											new()
-											{
-												Quantity = 0.005f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.01f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.015f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.02f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.025f
-											}
-										},
-										{
-											"double-headed",
-											new()
-											{
-												Quantity = 0.05f
-											}
-										}
-									}
+									Quantity = 1.5f,
+									Variability = 1
 								}
 							},
 							{
-								"bowtorn",
-								new ()
+								"gear-temporal",
+								new()
 								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.01f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.02f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.03f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.04f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.05f
-											}
-										},
-										{
-											"gearfoot",
-											new()
-											{
-												Quantity = 0.1f
-											}
-										}
-									}
+									Quantity = 0.1f
 								}
 							},
 							{
-								"shiver",
-								new ()
+								"gear-rusty",
+								new()
 								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.01f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.02f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.03f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.04f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.05f
-											}
-										},
-										{
-											"*",
-											new()
-											{
-												Quantity = 0.1f
-											}
-										}
-									}
+									Quantity = 0.3f
+								}
+							},
+							{
+								"nugget-nativecopper",
+								new()
+								{
+									Quantity = 1.5f,
+									Variability = 1
+								}
+							},
+							{
+								"nugget-cassiterite",
+								new()
+								{
+									Quantity = 0.4f
+								}
+							},
+							{
+								"nugget-sphalerite",
+								new()
+								{
+									Quantity = 0.05f
+								}
+							},
+							{
+								"nugget-galena",
+								new()
+								{
+									Quantity = 0.02f
+								}
+							},
+							{
+								"nugget-nativesilver",
+								new()
+								{
+									Quantity = 0.015f
+								}
+							},
+							{
+								"nugget-hematite",
+								new()
+								{
+									Quantity = 0.75f,
+									Variability = 0.75f
+								}
+							},
+							{
+								"hide-scraped-small",
+								new()
+								{
+									Quantity = 0.25f
+								}
+							},
+							{
+								"stone-bauxite",
+								new()
+								{
+									Quantity = 0.1f
+								}
+							},
+							{
+								"stone-meteorite-iron",
+								new()
+								{
+									Quantity = 0.025f
 								}
 							}
 						}
 					}
 				},
 				{
-					"nugget-nativesilver",
+					"drifter-double-headed",
 					new()
 					{
-						Mobs = new()
+						LootTable = new()
 						{
 							{
-								"drifter",
+								"flaxfibers",
 								new()
 								{
-									Variants = new()
-									{
-										{
-											"normal",
-											new()
-											{
-												Quantity = 0.0025f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.005f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.0075f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.01f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.015f
-											}
-										}
-									}
+									Quantity = 3,
+									Variability = 1
 								}
 							},
 							{
-								"bowtorn",
-								new ()
+								"gear-temporal",
+								new()
 								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.005f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.01f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.015f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.02f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.03f
-											}
-										}
-									}
+									Variability = 1
 								}
 							},
 							{
-								"shiver",
-								new ()
+								"gear-rusty",
+								new()
 								{
-									Variants = new()
-									{
-										{
-											"surface",
-											new()
-											{
-												Quantity = 0.005f
-											}
-										},
-										{
-											"deep",
-											new()
-											{
-												Quantity = 0.01f
-											}
-										},
-										{
-											"tainted",
-											new()
-											{
-												Quantity = 0.015f
-											}
-										},
-										{
-											"corrupt",
-											new()
-											{
-												Quantity = 0.02f
-											}
-										},
-										{
-											"nightmare",
-											new()
-											{
-												Quantity = 0.03f
-											}
-										}
-									}
+									Quantity = 5,
+									Variability = 3
+								}
+							},
+							{
+								"nugget-hematite",
+								new()
+								{
+									Quantity = 1.5f,
+									Variability = 1
+								}
+							},
+							{
+								"stone-meteorite-iron",
+								new()
+								{
+									Quantity = 0.05f
+								}
+							},
+							{
+								"stackrandomizer-alljonas",
+								new()
+								{
+									Quantity = 0.4f
 								}
 							}
 						}
 					}
 				},
 				{
-					"stackrandomizer-alljonas",
+					"bowtorn-surface",
 					new()
 					{
-						Mobs = new()
+						LootTable = new()
 						{
 							{
-								"drifter",
+								"flaxfibers",
 								new()
 								{
-									Variants = new()
-									{
-										{
-											"double-headed",
-											new()
-											{
-												Quantity = 0.4f
-											}
-										}
-									}
+									Quantity = 0.3333f
 								}
 							},
 							{
-								"bowtorn",
-								new ()
+								"gear-temporal",
+								new()
 								{
-									Variants = new()
-									{
-										{
-											"gearfoot",
-											new()
-											{
-												Quantity = 0.6f
-											}
-										}
-									}
+									Quantity = 0.05f
 								}
 							},
 							{
-								"shiver",
-								new ()
+								"gear-rusty",
+								new()
 								{
-									Variants = new()
-									{
-										{
-											"*",
-											new()
-											{
-												Quantity = 0.6f
-											}
-										}
-									}
+									Quantity = 0.03f
+								}
+							},
+							{
+								"cattailtops",
+								new()
+								{
+									Quantity = 0.3333f
+								}
+							},
+							{
+								"arrow-bone",
+								new()
+								{
+									Quantity = 0.75f,
+									Variability = 0.75f
+								}
+							},
+							{
+								"nugget-nativecopper",
+								new()
+								{
+									Quantity = 0.5f
+								}
+							},
+							{
+								"nugget-cassiterite",
+								new()
+								{
+									Quantity = 0.015f
+								}
+							},
+							{
+								"nugget-sphalerite",
+								new()
+								{
+									Quantity = 0.075f
+								}
+							},
+							{
+								"nugget-galena",
+								new()
+								{
+									Quantity = 0.03f
+								}
+							},
+							{
+								"nugget-nativesilver",
+								new()
+								{
+									Quantity = 0.005f
+								}
+							},
+							{
+								"hide-scraped-medium",
+								new()
+								{
+									Quantity = 0.05f
+								}
+							},
+							{
+								"stone-bauxite",
+								new()
+								{
+									Quantity = 0.03f
+								}
+							},
+							{
+								"stone-meteorite-iron",
+								new()
+								{
+									Quantity = 0.01f
+								}
+							},
+						}
+					}
+				},
+				{
+					"bowtorn-deep",
+					new()
+					{
+						LootTable = new()
+						{
+							{
+								"flaxfibers",
+								new()
+								{
+									Quantity = 0.6667f,
+									Variability = 0.6667f
+								}
+							},
+							{
+								"gear-temporal",
+								new()
+								{
+									Quantity = 0.0625f
+								}
+							},
+							{
+								"gear-rusty",
+								new()
+								{
+									Quantity = 0.06f
+								}
+							},
+							{
+								"arrow-bone",
+								new()
+								{
+									Variability = 1
+								}
+							},
+							{
+								"nugget-nativecopper",
+								new()
+								{
+									Quantity = 0.6667f,
+									Variability = 0.6667f
+								}
+							},
+							{
+								"nugget-cassiterite",
+								new()
+								{
+									Quantity = 0.15f
+								}
+							},
+							{
+								"nugget-sphalerite",
+								new()
+								{
+									Quantity = 0.075f
+								}
+							},
+							{
+								"nugget-galena",
+								new()
+								{
+									Quantity = 0.03f
+								}
+							},
+							{
+								"nugget-nativesilver",
+								new()
+								{
+									Quantity = 0.01f
+								}
+							},
+							{
+								"nugget-hematite",
+								new()
+								{
+									Quantity = 0.0333f
+								}
+							},
+							{
+								"hide-scraped-medium",
+								new()
+								{
+									Quantity = 0.1f
+								}
+							},
+							{
+								"stone-bauxite",
+								new()
+								{
+									Quantity = 0.06f
+								}
+							},
+							{
+								"stone-meteorite-iron",
+								new()
+								{
+									Quantity = 0.02f
+								}
+							}
+						}
+					}
+				},
+				{
+					"bowtorn-tainted",
+					new()
+					{
+						LootTable = new()
+						{
+							{
+								"flaxfibers",
+								new()
+								{
+									Variability = 1
+								}
+							},
+							{
+								"gear-temporal",
+								new()
+								{
+									Quantity = 0.075f
+								}
+							},
+							{
+								"gear-rusty",
+								new()
+								{
+									Quantity = 0.12f
+								}
+							},
+							{
+								"arrow-bone",
+								new()
+								{
+									Quantity = 1.5f,
+									Variability = 1
+								}
+							},
+							{
+								"nugget-nativecopper",
+								new()
+								{
+									Variability = 1
+								}
+							},
+							{
+								"nugget-cassiterite",
+								new()
+								{
+									Quantity = 0.3f
+								}
+							},
+							{
+								"nugget-sphalerite",
+								new()
+								{
+									Quantity = 0.075f
+								}
+							},
+							{
+								"nugget-galena",
+								new()
+								{
+									Quantity = 0.03f
+								}
+							},
+							{
+								"nugget-nativesilver",
+								new()
+								{
+									Quantity = 0.015f
+								}
+							},
+							{
+								"nugget-hematite",
+								new()
+								{
+									Quantity = 0.3333f
+								}
+							},
+							{
+								"hide-scraped-medium",
+								new()
+								{
+									Quantity = 0.15f
+								}
+							},
+							{
+								"stone-bauxite",
+								new()
+								{
+									Quantity = 0.09f
+								}
+							},
+							{
+								"stone-meteorite-iron",
+								new()
+								{
+									Quantity = 0.03f
+								}
+							}
+						}
+					}
+				},
+				{
+					"bowtorn-corrupt",
+					new()
+					{
+						LootTable = new()
+						{
+							{
+								"flaxfibers",
+								new()
+								{
+									Quantity = 1.5f,
+									Variability = 1
+								}
+							},
+							{
+								"gear-temporal",
+								new()
+								{
+									Quantity = 0.0875f
+								}
+							},
+							{
+								"gear-rusty",
+								new()
+								{
+									Quantity = 0.25f
+								}
+							},
+							{
+								"arrow-bone",
+								new()
+								{
+									Quantity = 2,
+									Variability = 1
+								}
+							},
+							{
+								"nugget-nativecopper",
+								new()
+								{
+									Quantity = 1.5f,
+									Variability = 1
+								}
+							},
+							{
+								"nugget-cassiterite",
+								new()
+								{
+									Quantity = 0.45f
+								}
+							},
+							{
+								"nugget-sphalerite",
+								new()
+								{
+									Quantity = 0.075f
+								}
+							},
+							{
+								"nugget-galena",
+								new()
+								{
+									Quantity = 0.03f
+								}
+							},
+							{
+								"nugget-nativesilver",
+								new()
+								{
+									Quantity = 0.02f
+								}
+							},
+							{
+								"nugget-hematite",
+								new()
+								{
+									Quantity = 0.6667f
+								}
+							},
+							{
+								"hide-scraped-medium",
+								new()
+								{
+									Quantity = 0.2f
+								}
+							},
+							{
+								"stone-bauxite",
+								new()
+								{
+									Quantity = 0.12f
+								}
+							},
+							{
+								"stone-meteorite-iron",
+								new()
+								{
+									Quantity = 0.04f
+								}
+							}
+						}
+					}
+				},
+				{
+					"bowtorn-nightmare",
+					new()
+					{
+						LootTable = new()
+						{
+							{
+								"flaxfibers",
+								new()
+								{
+									Quantity = 2,
+									Variability = 1
+								}
+							},
+							{
+								"gear-temporal",
+								new()
+								{
+									Quantity = 0.1f
+								}
+							},
+							{
+								"gear-rusty",
+								new()
+								{
+									Quantity = 0.5f
+								}
+							},
+							{
+								"arrow-bone",
+								new()
+								{
+									Quantity = 3,
+									Variability = 1
+								}
+							},
+							{
+								"nugget-nativecopper",
+								new()
+								{
+									Quantity = 2,
+									Variability = 1
+								}
+							},
+							{
+								"nugget-cassiterite",
+								new()
+								{
+									Quantity = 0.6f
+								}
+							},
+							{
+								"nugget-sphalerite",
+								new()
+								{
+									Quantity = 0.075f
+								}
+							},
+							{
+								"nugget-galena",
+								new()
+								{
+									Quantity = 0.03f
+								}
+							},
+							{
+								"nugget-nativesilver",
+								new()
+								{
+									Quantity = 0.03f
+								}
+							},
+							{
+								"nugget-hematite",
+								new()
+								{
+									Variability = 1
+								}
+							},
+							{
+								"hide-scraped-medium",
+								new()
+								{
+									Quantity = 0.25f
+								}
+							},
+							{
+								"stone-bauxite",
+								new()
+								{
+									Quantity = 0.15f
+								}
+							},
+							{
+								"stone-meteorite-iron",
+								new()
+								{
+									Quantity = 0.05f
+								}
+							}
+						}
+					}
+				},
+				{
+					"bowtorn-gearfoot",
+					new()
+					{
+						LootTable = new()
+						{
+							{
+								"flaxfibers",
+								new()
+								{
+									Quantity = 4,
+									Variability = 1
+								}
+							},
+							{
+								"gear-temporal",
+								new()
+								{
+									Quantity = 1.5f,
+									Variability = 1
+								}
+							},
+							{
+								"gear-rusty",
+								new()
+								{
+									Quantity = 7,
+									Variability = 3
+								}
+							},
+							{
+								"arrow-bone",
+								new()
+								{
+									Quantity = 4,
+									Variability = 2
+								}
+							},
+							{
+								"nugget-hematite",
+								new()
+								{
+									Quantity = 2,
+									Variability = 1
+								}
+							},
+							{
+								"stone-meteorite-iron",
+								new()
+								{
+									Quantity = 0.1f
+								}
+							},
+							{
+								"stackrandomizer-alljonas",
+								new()
+								{
+									Quantity = 0.6f
+								}
+							}
+						}
+					}
+				},
+				{
+					"shiver-surface",
+					new()
+					{
+						LootTable = new()
+						{
+							{
+								"flaxfibers",
+								new()
+								{
+									Quantity = 0.3333f
+								}
+							},
+							{
+								"gear-temporal",
+								new()
+								{
+									Quantity = 0.05f
+								}
+							},
+							{
+								"gear-rusty",
+								new()
+								{
+									Quantity = 0.03f
+								}
+							},
+							{
+								"cattailtops",
+								new()
+								{
+									Quantity = 0.3333f
+								}
+							},
+							{
+								"nugget-nativecopper",
+								new()
+								{
+									Quantity = 0.3333f
+								}
+							},
+							{
+								"nugget-cassiterite",
+								new()
+								{
+									Quantity = 0.015f
+								}
+							},
+							{
+								"nugget-sphalerite",
+								new()
+								{
+									Quantity = 0.075f
+								}
+							},
+							{
+								"nugget-galena",
+								new()
+								{
+									Quantity = 0.03f
+								}
+							},
+							{
+								"nugget-nativesilver",
+								new()
+								{
+									Quantity = 0.005f
+								}
+							},
+							{
+								"hide-scraped-medium",
+								new()
+								{
+									Quantity = 0.05f
+								}
+							},
+							{
+								"stone-bauxite",
+								new()
+								{
+									Quantity = 0.03f
+								}
+							},
+							{
+								"stone-meteorite-iron",
+								new()
+								{
+									Quantity = 0.01f
+								}
+							}
+						}
+					}
+				},
+				{
+					"shiver-deep",
+					new()
+					{
+						LootTable = new()
+						{
+							{
+								"flaxfibers",
+								new()
+								{
+									Quantity = 0.6667f,
+									Variability = 0.6667f
+								}
+							},
+							{
+								"gear-temporal",
+								new()
+								{
+									Quantity = 0.0625f
+								}
+							},
+							{
+								"gear-rusty",
+								new()
+								{
+									Quantity = 0.06f
+								}
+							},
+							{
+								"nugget-nativecopper",
+								new()
+								{
+									Quantity = 6667f,
+									Variability = 6667f
+								}
+							},
+							{
+								"nugget-cassiterite",
+								new()
+								{
+									Quantity = 0.15f
+								}
+							},
+							{
+								"nugget-sphalerite",
+								new()
+								{
+									Quantity = 0.075f
+								}
+							},
+							{
+								"nugget-galena",
+								new()
+								{
+									Quantity = 0.03f
+								}
+							},
+							{
+								"nugget-nativesilver",
+								new()
+								{
+									Quantity = 0.01f
+								}
+							},
+							{
+								"nugget-hematite",
+								new()
+								{
+									Quantity = 0.0333f
+								}
+							},
+							{
+								"hide-scraped-medium",
+								new()
+								{
+									Quantity = 0.1f
+								}
+							},
+							{
+								"stone-bauxite",
+								new()
+								{
+									Quantity = 0.06f
+								}
+							},
+							{
+								"stone-meteorite-iron",
+								new()
+								{
+									Quantity = 0.02f
+								}
+							}
+						}
+					}
+				},
+				{
+					"shiver-tainted",
+					new()
+					{
+						LootTable = new()
+						{
+							{
+								"flaxfibers",
+								new()
+								{
+									Variability = 1
+								}
+							},
+							{
+								"gear-temporal",
+								new()
+								{
+									Quantity = 0.075f
+								}
+							},
+							{
+								"gear-rusty",
+								new()
+								{
+									Quantity = 0.12f
+								}
+							},
+							{
+								"nugget-nativecopper",
+								new()
+								{
+									Variability = 1
+								}
+							},
+							{
+								"nugget-cassiterite",
+								new()
+								{
+									Quantity = 0.3f
+								}
+							},
+							{
+								"nugget-sphalerite",
+								new()
+								{
+									Quantity = 0.075f
+								}
+							},
+							{
+								"nugget-galena",
+								new()
+								{
+									Quantity = 0.03f
+								}
+							},
+							{
+								"nugget-nativesilver",
+								new()
+								{
+									Quantity = 0.015f
+								}
+							},
+							{
+								"nugget-hematite",
+								new()
+								{
+									Quantity = 0.3333f
+								}
+							},
+							{
+								"hide-scraped-medium",
+								new()
+								{
+									Quantity = 0.15f
+								}
+							},
+							{
+								"stone-bauxite",
+								new()
+								{
+									Quantity = 0.09f
+								}
+							},
+							{
+								"stone-meteorite-iron",
+								new()
+								{
+									Quantity = 0.03f
+								}
+							}
+						}
+					}
+				},
+				{
+					"shiver-corrupt",
+					new()
+					{
+						LootTable = new()
+						{
+							{
+								"flaxfibers",
+								new()
+								{
+									Quantity = 1.5f,
+									Variability = 1
+								}
+							},
+							{
+								"gear-temporal",
+								new()
+								{
+									Quantity = 0.0875f
+								}
+							},
+							{
+								"gear-rusty",
+								new()
+								{
+									Quantity = 0.25f
+								}
+							},
+							{
+								"nugget-nativecopper",
+								new()
+								{
+									Quantity = 1.5f,
+									Variability = 1
+								}
+							},
+							{
+								"nugget-cassiterite",
+								new()
+								{
+									Quantity = 0.45f
+								}
+							},
+							{
+								"nugget-sphalerite",
+								new()
+								{
+									Quantity = 0.075f
+								}
+							},
+							{
+								"nugget-galena",
+								new()
+								{
+									Quantity = 0.03f
+								}
+							},
+							{
+								"nugget-nativesilver",
+								new()
+								{
+									Quantity = 0.02f
+								}
+							},
+							{
+								"nugget-hematite",
+								new()
+								{
+									Quantity = 0.6667f
+								}
+							},
+							{
+								"hide-scraped-medium",
+								new()
+								{
+									Quantity = 0.2f
+								}
+							},
+							{
+								"stone-bauxite",
+								new()
+								{
+									Quantity = 0.12f
+								}
+							},
+							{
+								"stone-meteorite-iron",
+								new()
+								{
+									Quantity = 0.04f
+								}
+							}
+						}
+					}
+				},
+				{
+					"shiver-nightmare",
+					new()
+					{
+						LootTable = new()
+						{
+							{
+								"flaxfibers",
+								new()
+								{
+									Quantity = 2,
+									Variability = 1
+								}
+							},
+							{
+								"gear-temporal",
+								new()
+								{
+									Quantity = 0.1f
+								}
+							},
+							{
+								"gear-rusty",
+								new()
+								{
+									Quantity = 0.5f
+								}
+							},
+							{
+								"nugget-nativecopper",
+								new()
+								{
+									Quantity = 2,
+									Variability = 1
+								}
+							},
+							{
+								"nugget-cassiterite",
+								new()
+								{
+									Quantity = 0.6f
+								}
+							},
+							{
+								"nugget-sphalerite",
+								new()
+								{
+									Quantity = 0.075f
+								}
+							},
+							{
+								"nugget-galena",
+								new()
+								{
+									Quantity = 0.03f
+								}
+							},
+							{
+								"nugget-nativesilver",
+								new()
+								{
+									Quantity = 0.03f
+								}
+							},
+							{
+								"nugget-hematite",
+								new()
+								{
+									Variability = 1
+								}
+							},
+							{
+								"hide-scraped-medium",
+								new()
+								{
+									Quantity = 0.25f
+								}
+							},
+							{
+								"stone-bauxite",
+								new()
+								{
+									Quantity = 0.15f
+								}
+							},
+							{
+								"stone-meteorite-iron",
+								new()
+								{
+									Quantity = 0.05f
+								}
+							}
+						}
+					}
+				},
+				{
+					"shiver-*",
+					new()
+					{
+						LootTable = new()
+						{
+							{
+								"flaxfibers",
+								new()
+								{
+									Quantity = 4,
+									Variability = 1
+								}
+							},
+							{
+								"gear-temporal",
+								new()
+								{
+									Quantity = 1.5f,
+									Variability = 1
+								}
+							},
+							{
+								"gear-rusty",
+								new()
+								{
+									Quantity = 7,
+									Variability = 3
+								}
+							},
+							{
+								"nugget-hematite",
+								new()
+								{
+									Quantity = 2,
+									Variability = 1
+								}
+							},
+							{
+								"stone-meteorite-iron",
+								new()
+								{
+									Quantity = 0.1f
+								}
+							},
+							{
+								"stackrandomizer-alljonas",
+								new()
+								{
+									Quantity = 0.6f
 								}
 							}
 						}
@@ -2030,27 +1676,21 @@ namespace MND
 			ApiModConfigHelper.StoreConfig(config, FILENAME);
 			return config;
 		}
+
+		public float GlobalMultiplier { get; set; } = 1;
+		public Dictionary<string, float> EnabledItemsWithMultipliers { get; set; } = [];
+		public Dictionary<string, MobConfig> Mobs { get; set; } = [];
 	}
 
-	public class ConfigMobVariant
+	public class MobConfig
 	{
-		public bool Enabled { get; set; } = true;
 		public float Multiplier { get; set; } = 1;
+		public Dictionary<string, ItemConfig> LootTable { get; set; } = [];
+	}
+
+	public class ItemConfig
+	{
 		public float Quantity { get; set; } = 1;
 		public float Variability { get; set; } = 0;
-	}
-
-	public class ConfigMob
-	{
-		public bool Enabled { get; set; } = true;
-		public float Multiplier { get; set; } = 1;
-		public Dictionary<string, ConfigMobVariant> Variants { get; set; } = [];
-	}
-
-	public class ConfigItem
-	{
-		public bool Enabled { get; set; } = true;
-		public float Multiplier { get; set; } = 1;
-		public Dictionary<string, ConfigMob> Mobs { get; set; } = [];
 	}
 }
