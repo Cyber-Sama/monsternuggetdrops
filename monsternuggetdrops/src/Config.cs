@@ -3,9 +3,45 @@ using System.Collections.Generic;
 
 namespace MND
 {
+	public class MobConfig
+	{
+		public float Multiplier { get; set; } = 1;
+		public Dictionary<string, ItemConfig> LootTable { get; set; } = [];
+	}
+
+	public class ItemConfig
+	{
+		public float Quantity { get; set; } = 1;
+		public float Variability { get; set; } = 0;
+	}
+
 	public class Config
 	{
 		const string FILENAME = "monsterNuggetDrops.json";
+
+		public float GlobalMultiplier { get; set; } = 1;
+		public List<string> MobTypes = [];
+		public Dictionary<string, float> EnabledItemsWithMultipliers { get; set; } = [];
+		public Dictionary<string, MobConfig> Mobs { get; set; } = [];
+
+		public static Config Get()
+		{
+			Config? config;
+			try
+			{
+				config = ApiModConfigHelper.Api.LoadModConfig<Config>(FILENAME);
+				config ??= GetDefault();
+			}
+			catch (Exception ex)
+			{
+				ApiModConfigHelper.Error("Config file broken, fix it or delete it :-/");
+				ApiModConfigHelper.Error(ex);
+
+				return GetDefault();
+			}
+			ApiModConfigHelper.StoreConfig(config, FILENAME);
+			return config;
+		}
 
 		public static Config GetDefault() => new()
 		{
@@ -1657,41 +1693,5 @@ namespace MND
 				}
 			}
 		};
-
-		public static Config Get()
-		{
-			Config? config;
-			try
-			{
-				config = ApiModConfigHelper.Api.LoadModConfig<Config>(FILENAME);
-				config ??= GetDefault();
-			}
-			catch (Exception ex)
-			{
-				ApiModConfigHelper.Error("Config file broken, fix it or delete it :-/");
-				ApiModConfigHelper.Error(ex);
-
-				return GetDefault();
-			}
-			ApiModConfigHelper.StoreConfig(config, FILENAME);
-			return config;
-		}
-
-		public List<string> MobTypes = [];
-		public float GlobalMultiplier { get; set; } = 1;
-		public Dictionary<string, float> EnabledItemsWithMultipliers { get; set; } = [];
-		public Dictionary<string, MobConfig> Mobs { get; set; } = [];
-	}
-
-	public class MobConfig
-	{
-		public float Multiplier { get; set; } = 1;
-		public Dictionary<string, ItemConfig> LootTable { get; set; } = [];
-	}
-
-	public class ItemConfig
-	{
-		public float Quantity { get; set; } = 1;
-		public float Variability { get; set; } = 0;
 	}
 }
