@@ -6,10 +6,10 @@ namespace MND
 	public class Config
 	{
 		const string FILENAME = "monsterNuggetDrops.json";
-		public static readonly string[] MOBS = ["drifter", "bowtorn", "shiver"];
 
 		public static Config GetDefault() => new()
 		{
+			MobTypes = ["drifter", "bowtorn", "shiver"],
 			EnabledItemsWithMultipliers =
 			{
 				{ "flaxfibers", 1 },
@@ -1677,6 +1677,7 @@ namespace MND
 			return config;
 		}
 
+		public List<string> MobTypes = [];
 		public float GlobalMultiplier { get; set; } = 1;
 		public Dictionary<string, float> EnabledItemsWithMultipliers { get; set; } = [];
 		public Dictionary<string, MobConfig> Mobs { get; set; } = [];

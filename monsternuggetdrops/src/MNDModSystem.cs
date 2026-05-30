@@ -31,13 +31,10 @@ namespace MND
 			int applied = 0, notFound = 0, errorCount = 0;
 			jsonPatcher.ApplyPatch(0, location, patch, ref applied, ref notFound, ref errorCount);
 
-			if (!ApiModConfigHelper.Config.Enabled)
-			{
-				return;
-			}
-
+			var config = ApiModConfigHelper.Config;
+			
 			var patches = new Dictionary<string, List<JsonPatch>>();
-			foreach (var mob in Config.MOBS)
+			foreach (var mob in config.MobTypes)
 			{
 				patches[mob] = [
 					new() {
@@ -48,66 +45,44 @@ namespace MND
 				];
 			}
 
-			var data = new Dictionary<string, Dictionary<string, JArray>>();
-			foreach (var (itemCode, item) in ApiModConfigHelper.Config.Items)
+			var enabledItems = config.EnabledItemsWithMultipliers;
+			foreach (var (mobCode, mob) in config.Mobs)
 			{
-				if (!item.Enabled)
+				var array = new JArray();
+				foreach (var (itemCode, item) in mob.LootTable)
 				{
-					continue;
-				}
-
-				foreach (var (mobCode, mob) in item.Mobs)
-				{
-					if (!mob.Enabled)
+					if (!enabledItems.ContainsKey(itemCode))
 					{
 						continue;
 					}
 
-					if (!data.TryGetValue(mobCode, out var mobData))
+					var multiplier = config.GlobalMultiplier * mob.Multiplier * enabledItems[itemCode];
+					array.Add(new JObject
 					{
-						mobData = data[mobCode] = [];
-					}
-
-					foreach (var (variantCode, variant) in mob.Variants)
-					{
-						if (!variant.Enabled)
+						["type"] = "item",
+						["code"] = itemCode,
+						["quantity"] = new JObject
 						{
-							continue;
+							["avg"] = item.Quantity * multiplier,
+							["var"] = item.Variability
 						}
-
-						if (!mobData.TryGetValue(variantCode, out var variantData))
-						{
-							variantData = mobData[variantCode] = [];
-						}
-
-						var multiplier = ApiModConfigHelper.Config.Multiplier * item.Multiplier * mob.Multiplier * variant.Multiplier;
-						var qtyObj = new JObject
-						{
-							["avg"] = variant.Quantity * multiplier,
-							["var"] = variant.Variability
-						};
-						var patchObj = new JObject
-						{
-							["type"] = "item",
-							["code"] = itemCode,
-							["quantity"] = qtyObj
-						};
-						variantData.Add(patchObj);
-					}
-				}
-			}
-
-			foreach (var (mobCode, mobData) in data)
-			{
-				foreach (var (variantCode, variantData) in mobData)
-				{
-					patches[mobCode].Add(new()
-					{
-						Op = EnumJsonPatchOp.Replace,
-						Path = variantCode == "*" ? "/server/behaviors/9/dropsByType/*" : $"/server/behaviors/9/dropsByType/*-{variantCode}",
-						Value = new(variantData)
 					});
 				}
+
+				if (array.Count == 0)
+				{
+					continue;
+				}
+
+				var split = mobCode.Split('-', 2);
+				var type = split[1] == "*" ? "*" : $"*-{split[1]}";
+
+				patches[split[0]].Add(new()
+				{
+					Op = EnumJsonPatchOp.Replace,
+					Path = $"/server/behaviors/9/dropsByType/{type}",
+					Value = new(array)
+				});
 			}
 
 			foreach (var (mobCode, items) in patches)
@@ -137,14 +112,14 @@ namespace MND
 		static ICoreServerAPI? _api;
 		public static ICoreServerAPI Api
 		{
-			get => _api ?? throw new System.Exception("");
+			get => _api ?? throw new System.Exception("Api is null");
 			set => _api = value;
 		}
 
 		static Mod? _mod;
 		public static Mod Mod
 		{
-			get => _mod ?? throw new System.Exception("");
+			get => _mod ?? throw new System.Exception("Mod is null");
 			set => _mod = value;
 		}
 
