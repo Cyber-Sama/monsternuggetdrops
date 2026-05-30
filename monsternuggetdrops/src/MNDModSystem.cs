@@ -32,9 +32,10 @@ namespace MND
 			jsonPatcher.ApplyPatch(0, location, patch, ref applied, ref notFound, ref errorCount);
 
 			var config = ApiModConfigHelper.Config;
-			
+
+			var mobTypes = config.MobTypes;
 			var patches = new Dictionary<string, List<JsonPatch>>();
-			foreach (var mob in config.MobTypes)
+			foreach (var mob in mobTypes)
 			{
 				patches[mob] = [
 					new() {
@@ -48,10 +49,11 @@ namespace MND
 			var enabledItems = config.EnabledItemsWithMultipliers;
 			foreach (var (mobCode, mob) in config.Mobs)
 			{
+				var split = mobCode.Split('-', 2);
 				var array = new JArray();
 				foreach (var (itemCode, item) in mob.LootTable)
 				{
-					if (!enabledItems.ContainsKey(itemCode))
+					if (!enabledItems.ContainsKey(itemCode) || !mobTypes.Contains(split[0]))
 					{
 						continue;
 					}
@@ -74,9 +76,7 @@ namespace MND
 					continue;
 				}
 
-				var split = mobCode.Split('-', 2);
 				var type = split[1] == "*" ? "*" : $"*-{split[1]}";
-
 				patches[split[0]].Add(new()
 				{
 					Op = EnumJsonPatchOp.Replace,
